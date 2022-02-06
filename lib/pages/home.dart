@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Pregunta ${index+1}/${questions.length}",
+                  "Pregunta de quiz ${index+1}/${questions.length}",
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w300,
