@@ -29,7 +29,19 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                
+                Text(
+                  "Pregunta ${index+1}/${questions.length}",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 28.0,
+                  ),
+                ),
+                const Divider(
+                  color: Colors.white,
+                  height: 8.0,
+                  thickness: 1.0,
+                )
               ],
             );
           },
