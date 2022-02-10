@@ -28,7 +28,7 @@ List<QuestionModel> questions = [
     "4": true,
     "8": false,
   }),
-  QuestionModel("What is Mars's nickname ?", {
+  QuestionModel("What is Mars's nicknames?", {
     "The red planet": true,
     "The dusty planet": false,
     "The hot planet": false,
