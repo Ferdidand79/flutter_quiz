@@ -29,12 +29,15 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Pregunta de quiz ${index+1}/${questions.length}",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w300,
-                    fontSize: 28.0,
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    "Pregunta de quiz ${index+1}/${questions.length}",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 28.0,
+                    ),
                   ),
                 ),
                 const Divider(
