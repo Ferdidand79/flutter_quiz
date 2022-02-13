@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quiz/colors/color.dart';
 import 'package:flutter_quiz/data/question_list.dart';
 
+import '../screens/result_screen.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -16,6 +18,15 @@ class _HomePageState extends State<HomePage> {
   //en nuestra pantalla, por supuesto, puede usar su propia lista u obtener datos
   //desde un API existente
   //empecemos
+
+  PageController? _controller = PageController(initialPage: 0);
+
+  bool isPressed = false;
+  Color isTrues = Colors.green;
+  Color isWrong = Colors.red;
+  Color btnColor = secondColor;
+  int score = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +34,13 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: EdgeInsets.all(18.0),
         child: PageView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          controller: _controller!,
+          onPageChanged: (page) {
+            setState(() {
+              isPressed = false;
+            });
+          },
           itemCount: questions.length,
           itemBuilder: (context, index) {
             return Column(
@@ -32,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    "Pregunta de quiz ${index+1}/${questions.length}",
+                    "Pregunta de quiz ${index + 1}/${questions.length}",
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w300,
@@ -44,7 +62,83 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                   height: 8.0,
                   thickness: 1.0,
-                )
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Text(
+                  questions[index].question!,
+                  style: const TextStyle(color: Colors.white, fontSize: 28.0),
+                ),
+                SizedBox(
+                  height: 35.0,
+                ),
+                for (int i = 0; i < questions[index].answers!.length; i++)
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(bottom: 18.0),
+                    child: MaterialButton(
+                      shape: StadiumBorder(),
+                      color: isPressed
+                          ? questions[index].answers!.entries.toList()[i].value
+                              ? isTrues
+                              : isWrong
+                          : secondColor,
+                      padding: EdgeInsets.symmetric(vertical: 18.0),
+                      onPressed: isPressed
+                          ? () {}
+                          : () {
+                              setState(() {
+                                isPressed = true;
+                              });
+                              if (questions[index]
+                                  .answers!
+                                  .entries
+                                  .toList()[i]
+                                  .value) {
+                                score += 10;
+                                print(score);
+                              }
+                            },
+                      child: Text(
+                        questions[index].answers!.keys.toList()[i],
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                SizedBox(height: 50.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    OutlinedButton(
+                      onPressed: isPressed
+                          ? index + 1 == questions.length
+                              ? () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ResultScreen()));
+                                }
+                              : () {
+                                  _controller!.nextPage(
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.linear);
+                                }
+                          : null,
+                      style: ButtonStyle(),
+                      child: Text(
+                        index + 1 == questions.length
+                            ? "Mirar resultado"
+                            : "Sigueinte pregunta",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             );
           },
