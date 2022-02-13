@@ -119,15 +119,21 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => ResultScreen()));
+                                          builder: (context) => ResultScreen(score)));
                                 }
                               : () {
                                   _controller!.nextPage(
                                       duration: Duration(milliseconds: 500),
                                       curve: Curves.linear);
+                                      setState(() {
+                                        isPressed= false;
+                                      });
                                 }
                           : null,
-                      style: ButtonStyle(),
+                      style: OutlinedButton.styleFrom(
+                        shape: StadiumBorder(),
+                        side: BorderSide(color: Colors.orange, width: 1.0)
+                      ),
                       child: Text(
                         index + 1 == questions.length
                             ? "Mirar resultado"
