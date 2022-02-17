@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: Text(
                         index + 1 == questions.length
-                            ? "Mirar resultado"
+                            ? "Mirar resultado: "
                             : "Sigueinte pregunta",
                         style: TextStyle(
                           color: Colors.white,
