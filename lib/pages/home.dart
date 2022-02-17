@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    "Pregunta de quiz ${index + 1}/${questions.length}",
+                    "Pregunta de quizz ${index + 1}/${questions.length}",
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w300,
